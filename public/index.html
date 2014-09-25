@@ -6,9 +6,27 @@
   </head>
 
   <body>
-    <iframe src="http://dev.stonegateconnect.com" width="800" height="800">   
+    <iframe src="http://dev.stonegateconnect.com/#/embedded" width="450" height="360">   
       <p>iframes are not supported by your browser.</p> 
     </iframe>
   </body>
 
   </html>
+ <script >
+ // Here "addEventListener" is for standards-compliant web browsers and "attachEvent" is for IE Browsers.
+var eventMethod = window.addEventListener ? "addEventListener" : "attachEvent";
+var eventer = window[eventMethod];
+
+// Now...
+// if 
+//    "attachEvent", then we need to select "onmessage" as the event. 
+// if 
+//    "addEventListener", then we need to select "message" as the event
+
+var messageEvent = eventMethod == "attachEvent" ? "onmessage" : "message";
+
+// Listen to message from child IFrame window
+eventer(messageEvent, function (e) {
+      window.location.assign("http://dev.stonegateconnect.com");
+}, false);    
+ </script>
